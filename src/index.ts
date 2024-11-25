@@ -9,5 +9,5 @@ const app = express()
 app.use('/api',apiRouter)
 
 app.listen(serverConfig.PORT,()=>{
-    console.log(`Listening to ${serverConfig.PORT}`)
+    console.log(`Listenng to ${serverConfig.PORT}`)
 })
