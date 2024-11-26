@@ -29,7 +29,7 @@ Add there script in package.json
     "build": "npx tsc",
     "watch": "npx tsc -w",
     "start": "npx nodemon dist/index.js",
-    "dev": "npx concurrently \"npm run watch\" \"npm start\" "
+    "dev": "npx concurrently --kill-others \"npm run watch\" \"npm start\" "
   }
 
 ```
