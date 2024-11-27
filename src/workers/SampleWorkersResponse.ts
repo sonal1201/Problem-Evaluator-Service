@@ -1,7 +1,7 @@
 import { Job, Worker } from "bullmq";
 
 import redisConnection from "../config/redisConfig";
-import SampleJob from "../jobs/sampleJob";
+import SampleJob from "../jobs/SampleJob";
 
 export default function SubmissionWorker(queueName: string) {
     new Worker(
