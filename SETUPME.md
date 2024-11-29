@@ -34,7 +34,13 @@ Add there script in package.json
 
 ```
 
-5.
+5. 
+
+```
+docker pull python3.8-slim
+```
+
+6.
 
 ```
 npm run dev
