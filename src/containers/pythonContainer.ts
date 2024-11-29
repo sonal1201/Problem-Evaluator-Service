@@ -28,14 +28,19 @@ async function runPythonCode(code:string , inputTestCases: string) {
         rawBuffer.push(chunk)
     })
 
-    loggerStrem.on('end',()=>{
-        console.log(rawBuffer);
-        const completeBuffer = Buffer.concat(rawBuffer);
-        const decodedStrem = decodeDockerSteram(completeBuffer);
-        console.log(decodedStrem)
+    await new Promise((res)=>{
+        loggerStrem.on('end',()=>{
+            console.log(rawBuffer);
+            const completeBuffer = Buffer.concat(rawBuffer);
+            const decodedStrem = decodeDockerSteram(completeBuffer);
+            console.log(decodedStrem)
+            res(decodeDockerSteram)
+        })
     })
 
-    return pythonDockerContainer;
+    
+
+    return pythonDockerContainer.remove();
 }
 
 export default runPythonCode
