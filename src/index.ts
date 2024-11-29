@@ -24,8 +24,20 @@ app.listen(serverConfig.PORT,()=>{
 
     SampleWorker('SampleQueue');
 
-    const code = `Print("Hello")`;
 
-    runPythonCode(code);
+    const code = `
+x= input()
+y= input()
+c =x+y
+print("Value of x is:", x)
+print("Value of y is:", y)
+print(c)
+`
+
+const testCase =`100
+200
+`
+
+    runPythonCode(code,testCase);
 
 })
