@@ -6,7 +6,8 @@ import serverConfig from "./config/serverConfig"
 import apiRouter from "./routes"
 import SampleWorker from "./workers/SampleWorkersResponse"
 // import runPythonCode from "./containers/pythonContainer"
-import runJavaCode from "./containers/runJavaDocker"
+// import runJavaCode from "./containers/runJavaDocker"
+import runCppCode from "./containers/runCppDocker"
 
 
 const app: Express = express()
@@ -27,17 +28,18 @@ app.listen(serverConfig.PORT,()=>{
 
 
     const code = `
-    import java.util.Scanner;
-    public class Main {  // Make sure this is the name of the class
-        public static void main(String[] args) {
-            Scanner scanner = new Scanner(System.in);
-            int num = scanner.nextInt();
-            System.out.println("Input number: " + num);
-        }
-    }
-  `;
+#include <iostream>
+using namespace std;
+
+int main() {
+    int num;
+    cin >> num;
+    cout << "Input number: " << num ;
+    return 0;
+}
+`;
 const testCase =`42`
 
-    runJavaCode(code,testCase);
+    runCppCode(code,testCase);
 
 })
