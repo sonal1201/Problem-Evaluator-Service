@@ -5,7 +5,8 @@ import serverConfig from "./config/serverConfig"
 // import sampleQueueProducer from "./producers/sampleQueueProducer"
 import apiRouter from "./routes"
 import SampleWorker from "./workers/SampleWorkersResponse"
-import runPythonCode from "./containers/pythonContainer"
+// import runPythonCode from "./containers/pythonContainer"
+import runJavaCode from "./containers/runJavaDocker"
 
 
 const app: Express = express()
@@ -26,18 +27,17 @@ app.listen(serverConfig.PORT,()=>{
 
 
     const code = `
-x= input()
-y= input()
-c =x+y
-print("Value of x is:", x)
-print("Value of y is:", y)
-print(c)
-`
+    import java.util.Scanner;
+    public class Main {  // Make sure this is the name of the class
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+            int num = scanner.nextInt();
+            System.out.println("Input number: " + num);
+        }
+    }
+  `;
+const testCase =`42`
 
-const testCase =`100
-200
-`
-
-    runPythonCode(code,testCase);
+    runJavaCode(code,testCase);
 
 })
