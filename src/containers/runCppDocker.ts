@@ -11,11 +11,13 @@ async function runCppCode(code:string , inputTestCases: string) {
     
     const rawBuffer: Buffer[] = [];
     await pullImage(CPP_IMG)
+    const runCommand = `echo '${code.replace(/'/g, `'\\"`)}' > main.cpp && g++ main.cpp -o main && echo '${inputTestCases.replace(/'/g, `'\\"`)}' | ./main`;
+    console.log(runCommand);
     const cppDockerContainer = await createcontainer(CPP_IMG, [
-        '/bin/sh',
+        '/bin/sh', 
         '-c',
-        `echo '${code.replace(/'/g, '\\"')}' > main.cpp && g++ main.cpp -o main && echo '${inputTestCases.replace(/'/g, '\\"')}' | stdbuf -oL -eL ./main `
-      ]);
+        runCommand
+    ]);
     console.log("Started");
     await cppDockerContainer.start();
 

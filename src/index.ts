@@ -9,7 +9,10 @@ import SampleWorker from "./workers/SampleWorkersResponse"
 
 // import runPythonCode from "./containers/pythonContainer"
 // import runJavaCode from "./containers/runJavaDocker"
-import runCppCode from "./containers/runCppDocker"
+// import runCppCode from "./containers/runCppDocker"
+import SubmissionWorker from "./workers/submissionWorker"
+import { Submission_Queue } from "./utils/constants"
+import submissionProducer from "./producers/submissionProducer"
 
 
 const app: Express = express()
@@ -27,6 +30,9 @@ app.listen(serverConfig.PORT,()=>{
     console.log(`Listenng to ${serverConfig.PORT}`)
 
     SampleWorker('SampleQueue');
+    SubmissionWorker(Submission_Queue);
+
+
 
 
     const code = `
@@ -40,8 +46,14 @@ int main() {
     return 0;
 }
 `;
-const testCase =`42`
+const testcase =`42`
 
-    runCppCode(code,testCase);
+submissionProducer({'123':{
+    language:"CPP",
+    testcase,
+    code
+}})
+
+    // runCppCode(code,testCase);
 
 })
