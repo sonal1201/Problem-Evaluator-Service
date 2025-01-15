@@ -1,14 +1,16 @@
 // import Docker from 'dockerode';
 // import { TestCases } from '../types/testCases';
 import { CPP_IMG } from '../utils/constants';
-
 import createcontainer from './containerFac';
 import decodeDockerSteram from './dockerHelper';
+import pullImage from './pullImage';
+
+
 
 async function runCppCode(code:string , inputTestCases: string) {
     
     const rawBuffer: Buffer[] = [];
-    //const pythonDockerContainer = await createcontainer(PYTHON_IMG,['python3','-c',code,'stty -echo']);
+    await pullImage(CPP_IMG)
     const cppDockerContainer = await createcontainer(CPP_IMG, [
         '/bin/sh',
         '-c',

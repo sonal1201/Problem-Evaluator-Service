@@ -4,11 +4,12 @@ import { PYTHON_IMG } from '../utils/constants';
 
 import createcontainer from './containerFac';
 import decodeDockerSteram from './dockerHelper';
+import pullImage from './pullImage';
 
 async function runPythonCode(code:string , inputTestCases: string) {
     
     const rawBuffer: Buffer[] = [];
-    //const pythonDockerContainer = await createcontainer(PYTHON_IMG,['python3','-c',code,'stty -echo']);
+    await pullImage(PYTHON_IMG)
     const pythonDockerContainer = await createcontainer(PYTHON_IMG, [
         '/bin/sh',
         '-c',

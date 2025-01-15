@@ -4,11 +4,12 @@ import { JAVA_IMG } from '../utils/constants';
 
 import createcontainer from './containerFac';
 import decodeDockerSteram from './dockerHelper';
+import pullImage from './pullImage';
 
 async function runJavaCode(code:string , inputTestCases: string) {
     
     const rawBuffer: Buffer[] = [];
-    //const pythonDockerContainer = await createcontainer(PYTHON_IMG,['python3','-c',code,'stty -echo']);
+    await pullImage(JAVA_IMG);
     const javaDockerContainer = await createcontainer(JAVA_IMG, [
         '/bin/sh',
         '-c',
